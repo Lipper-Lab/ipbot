@@ -25,12 +25,18 @@ def getIP():
 @app.route("/bd/<section>")
 def base64Decode(section):
     assert section == request.view_args['section']
-    return str(pybase64.standard_b64decode(str(section)).decode('utf-8'))  + str('\n'), 200
+    try:
+        return str(pybase64.standard_b64decode(str(section)).decode('utf-8'))  + str('\n'), 200
+    except:
+        return "Please check your parameter. QAQ"
 
 @app.route("/b/<section>")
 def base64Encode(section):
     assert section == request.view_args['section']
-    return str(pybase64.standard_b64encode(str(section).encode('UTF-8')).decode('utf-8'))  + str('\n'), 200
+    try:
+        return str(pybase64.standard_b64encode(str(section).encode('UTF-8')).decode('utf-8'))  + str('\n'), 200
+    except:
+        return "Please check your parameter. QAQ"
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
