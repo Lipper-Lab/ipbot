@@ -22,11 +22,15 @@ def getIP():
     return str(ip) + str('\n'), 200
 
 
+@app.route("/bd/<section>")
+def base64Encode(section):
+    assert section == request.view_args['section']
+    return str(pybase64.standard_b64decode(str(section)).decode('utf-8'))  + str('\n'), 200
+
 @app.route("/b/<section>")
 def base64Encode(section):
     assert section == request.view_args['section']
-    return str(pybase64.standard_b64decode(str(section)))  + str('\n'), 200
-    
+    return str(pybase64.standard_b64encode(str(section)).decode('utf-8'))  + str('\n'), 200
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
