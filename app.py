@@ -23,7 +23,7 @@ def getIP():
 
 
 @app.route("/bd/<section>")
-def base64Encode(section):
+def base64Decode(section):
     assert section == request.view_args['section']
     return str(pybase64.standard_b64decode(str(section)).decode('utf-8'))  + str('\n'), 200
 
