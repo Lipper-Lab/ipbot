@@ -19,13 +19,13 @@ def getIP():
         ip = request.headers.getlist("X-Forwarded-For")[0]
     else:
         ip = request.remote_addr
-    return str(ip), 200
+    return str(ip) + str('\n'), 200
 
 
 @app.route("/b/<section>")
 def base64Encode(section):
     assert section == request.view_args['section']
-    return pybase64.standard_b64decode(str(section)), 200
+    return pybase64.standard_b64decode(str(section))  + str('\n'), 200
     
 
 if __name__ == '__main__':
