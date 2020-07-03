@@ -1,6 +1,7 @@
 from flask import request
 from flask import jsonify
 from flask import Flask
+import pybase64
 
 app = Flask(__name__)
 
@@ -19,7 +20,12 @@ def getIP():
     else:
         ip = request.remote_addr
     return str(ip), 200
-    
+
+
+@app.route("/b/<section>")
+def base64Encode(section):
+    assert section == request.view_args['section']
+    return pybase64.standard_b64decode(str(section)), 200
     
 
 if __name__ == '__main__':
